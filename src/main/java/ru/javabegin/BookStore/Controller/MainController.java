@@ -88,10 +88,10 @@ public class MainController {
     }
 
     @PostMapping(path = "/account/setMoney", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<account> MessageSetMoney(@RequestBody account newAccount){
-        mainServer.getAccount().setMoney(mainServer.getAccount().getMoney() + newAccount.getMoney());
+    public ResponseEntity<account> MessageSetMoney(@RequestBody Deal newAccount){
+        mainServer.getAccount().setMoney(mainServer.getAccount().getMoney() + Math.abs(newAccount.getMoney()));
         jsonParser.ToJson(mainServer);
-        LOGGER.log(Level.INFO,"Money transferred to the account in the amount of " +newAccount.getMoney());
+        LOGGER.log(Level.INFO,"Money transferred to the account in the amount of " + newAccount.getMoney());
         return new ResponseEntity<>(mainServer.getAccount(), HttpStatus.OK);
     }
 
